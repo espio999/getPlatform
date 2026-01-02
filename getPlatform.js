@@ -1259,11 +1259,13 @@
   }
 }.call(this));
 
+/*
 const $os = document.querySelector('#os');
 $os.textContent = platform.os;
 
 const $browser = document.querySelector('#browser');
 $browser.textContent = platform.name;
+*/
 
 //const REDIRECT_DESTINATION = "https://chinadigitaltimes.net/space/CDS%E4%B8%93%E9%A1%B5%EF%BC%9A%E6%95%8F%E6%84%9F%E8%AF%8D%E5%BA%93"
 const REDIRECT_DESTINATION = "https://impsbl.hatenablog.jp/entry/20251231";
@@ -1276,8 +1278,8 @@ function executeLoggingAndRedirect(reason) {
 }
 
 function shouldRedirect() {
-  // 1. まずリファラをチェック（なければ次の検問へ、あれば即終了）
-  if (!checkNoReferrer()) {
+  // 1. リファラをチェック（なければ次の検問へ、あれば即終了）
+  if (!isNoReferrer()) {
     return false; 
   }
 
@@ -1303,9 +1305,9 @@ function shouldRedirect() {
   return false;
 }
 
-function checkNoReferrer(){
+function isNoReferrer(){
   //referrer無し、直接アクセスの場合はtrueを返す。
-  return (document.referrer === null || document.referrer.length == 0) ? true : false;
+  return (document.referrer) ? false : true;
 }
 
 function isUnknownDevice(){
