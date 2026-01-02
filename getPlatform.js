@@ -1280,29 +1280,29 @@ function executeLoggingAndRedirect(reason) {
 function shouldRedirect() {
   // 1. リファラをチェック（なければ次の検問へ、あれば即終了）
   if (!isNoReferrer()) {
-    return false; 
+    return; 
   }
 
   // 2. デバイス名が不明かチェック（不明なら即リダイレクト）
   if (isUnknownDevice()) {
     executeLoggingAndRedirect("ET");
-    return true;
+    return;
   }
 
   // 3. 解像度をチェック（対象解像度なら次の検閲へ、そうでなければ即終了）
   if (checkResolution()){
     executeLoggingAndRedirect("SA");
-    return false;
+    return;
   }
 
   // 4. 特定の組合せのプラットフォームをチェック（対象ならリダイレクト、そうでなければ即終了）
   if (isProhibitedEnvironment()) {
     executeLoggingAndRedirect("XGA");
-    return true;
+    return;
   }
 
   // すべての検問を潜り抜けたものだけがアクセス許可
-  return false;
+  return;
 }
 
 function isNoReferrer(){
