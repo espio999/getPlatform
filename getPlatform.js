@@ -1267,13 +1267,13 @@ const $browser = document.querySelector('#browser');
 $browser.textContent = platform.name;
 */
 
-//const REDIRECT_DESTINATION = "https://chinadigitaltimes.net/space/CDS%E4%B8%93%E9%A1%B5%EF%BC%9A%E6%95%8F%E6%84%9F%E8%AF%8D%E5%BA%93"
-const REDIRECT_DESTINATION = "https://impsbl.hatenablog.jp/entry/20251231";
-const DESTINATION_HASH = "#%E4%B8%8D%E5%AF%A9%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%AEredirect%E5%85%88";
-
 function executeLoggingAndRedirect(reason) {
+  //const REDIRECT_DESTINATION = "https://chinadigitaltimes.net/space/CDS%E4%B8%93%E9%A1%B5%EF%BC%9A%E6%95%8F%E6%84%9F%E8%AF%8D%E5%BA%93";
+  const REDIRECT_DESTINATION = "https://impsbl.hatenablog.jp/entry/20251231";
+  const DESTINATION_HASH = "#%E4%B8%8D%E5%AF%A9%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%AEredirect%E5%85%88";
   const timestamp = new Date().getTime();
   var url = `${REDIRECT_DESTINATION}?&uid=${reason}&t=${timestamp}${DESTINATION_HASH}`;
+  
   window.location.replace(url);
 }
 
@@ -1313,8 +1313,8 @@ function isNoReferrer(){
 function isUnknownDevice(){
   // ブラウザ、OSが不明か判定
   //!null-->true
-  let isNull_browser = !platform.name;
-  let isNull_os = !platform.os.family;
+  const isNull_browser = !platform.name;
+  const isNull_os = !platform.os.family;
 
   //ブラウザ、OSの一方が不明ならtrueを返す。
   return isNull_browser || isNull_os;
