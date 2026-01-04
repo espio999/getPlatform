@@ -1348,8 +1348,7 @@ function isProhibitedEnvironment() {
     const prohibitedCombinations = [
         { os: 'Linux', browser: 'Chrome', width: 1280, height: 720 },
         { os: 'Linux', browser: 'Chrome', width: 1280, height: 800 },
-        { os: 'Mac OS', browser: 'Chrome', width: 800, height: 600 },
-        { os: 'OS X', browser: 'Chrome', width: 800, height: 600 }
+        { os: 'iOS', browser: 'Chrome', width: 800, height: 600 }
     ];
 
     const currentOS = (isLinux) ? "Linux" : platform.os.family;
