@@ -1269,10 +1269,12 @@ $browser.textContent = platform.name;
 
 function executeLoggingAndRedirect(reason) {
   //const REDIRECT_DESTINATION = "https://chinadigitaltimes.net/space/CDS%E4%B8%93%E9%A1%B5%EF%BC%9A%E6%95%8F%E6%84%9F%E8%AF%8D%E5%BA%93";
-  const REDIRECT_DESTINATION = "https://impsbl.hatenablog.jp/entry/20251231";
-  const DESTINATION_HASH = "#%E4%B8%8D%E5%AF%A9%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%AEredirect%E5%85%88";
-  const timestamp = new Date().getTime();
-  var url = `${REDIRECT_DESTINATION}?&uid=${reason}&t=${timestamp}${DESTINATION_HASH}`;
+  //const REDIRECT_DESTINATION = "https://impsbl.hatenablog.jp/entry/20251231";
+  const REDIRECT_DESTINATION = "https://127.0.0.1";
+  //const DESTINATION_HASH = "#%E4%B8%8D%E5%AF%A9%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%AEredirect%E5%85%88";
+  //const timestamp = new Date().getTime();
+  //var url = `${REDIRECT_DESTINATION}?&uid=${reason}&t=${timestamp}${DESTINATION_HASH}`;
+  var url = `${REDIRECT_DESTINATION}`;
   
   window.location.replace(url);
 }
