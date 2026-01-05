@@ -1349,7 +1349,7 @@ function isProhibitedEnvironment() {
     const prohibitedCombinations = [
         { os: 'Linux', browser: 'Chrome', width: 1280, height: 720 },
         { os: 'Linux', browser: 'Chrome', width: 1280, height: 800 },
-        { os: 'OS', browser: 'Chrome', width: 800, height: 600 },
+        { os: 'MacOS', browser: 'Chrome', width: 800, height: 600 },
         { os: 'OS X', browser: 'Chrome', width: 800, height: 600 },
         { os: 'iOS', browser: 'Chrome', width: 800, height: 600 }
     ];
@@ -1358,7 +1358,7 @@ function isProhibitedEnvironment() {
     let currentOS = platform.os ? platform.os.family : "";
     if (isLinux()) {
         currentOS = "Linux";
-    } else if (isMacintosh()) {
+    } else if (isMacOS()) {
         currentOS = "MacOS";
     } else if (isOSX()) {
         currentOS = "OS X";
