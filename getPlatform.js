@@ -1349,6 +1349,8 @@ function isProhibitedEnvironment() {
     const prohibitedCombinations = [
         { os: 'Linux', browser: 'Chrome', width: 1280, height: 720 },
         { os: 'Linux', browser: 'Chrome', width: 1280, height: 800 },
+        { os: 'OS', browser: 'Chrome', width: 800, height: 600 },
+        { os: 'OS X', browser: 'Chrome', width: 800, height: 600 },
         { os: 'iOS', browser: 'Chrome', width: 800, height: 600 }
     ];
 
@@ -1356,6 +1358,10 @@ function isProhibitedEnvironment() {
     let currentOS = platform.os ? platform.os.family : "";
     if (isLinux()) {
         currentOS = "Linux";
+    } else if (isMacintosh()) {
+        currentOS = "MacOS";
+    } else if (isOSX()) {
+        currentOS = "OS X";
     } else if (is_iOS()) {
         currentOS = "iOS";
     }
@@ -1386,6 +1392,22 @@ function isLinux(){
   // Linux、あるいはライブラリが Linux ディストリビューションとして認識しているか
   // AndroidもLinuxカーネルなので、除外する判定
   return !!(osFamily && linuxReg.test(osFamily) && !/Android/i.test(osFamily));
+}
+
+function isMacOS(){
+  const my_reg = /\bMac OS\b/;
+  const osFamily = platform.os ? platform.os.family : "";
+
+  // 直接 'Mac OS' という文字列が含まれているか
+  return !!(osFamily && my_reg.test(osFamily));
+}
+
+function isOSX(){
+  const my_reg = /\bOS X\b/;
+  const osFamily = platform.os ? platform.os.family : "";
+
+  // 直接 'OS X' という文字列が含まれているか
+  return !!(osFamily && my_reg.test(osFamily));
 }
 
 function is_iOS(){
