@@ -1329,7 +1329,8 @@ function checkResolution(){
     "1200,3000",
     "1366,1366",
     "1600,1600",
-    "517,826"
+    "517,826",
+    //"800,600"
   ]);
 
   // サーバーサイドなら 0、ブラウザなら実際の幅を入れる
@@ -1351,14 +1352,21 @@ function isProhibitedEnvironment() {
         { os: 'iOS', browser: 'Chrome', width: 800, height: 600 }
     ];
 
-    const currentOS = (isLinux) ? "Linux" : platform.os.family;
+    // OSの特定
+    let currentOS = platform.os ? platform.os.family : "";
+    if (isLinux()) {
+        currentOS = "Linux";
+    } else if (is_iOS()) {
+        currentOS = "iOS";
+    }
+
     const currentBrowser = platform.name;
 
     const is_undefined = (typeof window === 'undefined' || typeof screen === 'undefined') ? true : false;
     const currentWidth = (is_undefined) ? 0 : screen.width;
     const currentHeight = (is_undefined) ? 0 : screen.height;
 
-    // ４．判定した値の組合せが、あらかじめ保持していた組合せに含まれるかを確認する
+    // 判定した値の組合せが、あらかじめ保持していた組合せに含まれるかを確認する
     // Array.prototype.some() は、条件に一致する要素が一つでもあれば true を返します
     const isMatched = prohibitedCombinations.some(function(config) {
         return config.os === currentOS &&
@@ -1372,17 +1380,20 @@ function isProhibitedEnvironment() {
 }
 
 function isLinux(){
-  var osFamily = platform.os.family;
+  const my_reg = /Linux|Ubuntu|Debian|Fedora|Red Hat|SuSE|CentOS|Gentoo/i;
+  const osFamily = platform.os ? platform.os.family : "";
 
-  // 1. 直接 'Linux' という文字列が含まれているか
-  // 2. もしくは、ライブラリが Linux ディストリビューションとして認識しているか
-  if (osFamily && /Linux|Ubuntu|Debian|Fedora|Red Hat|SuSE|CentOS|Gentoo/i.test(osFamily)) {
-    // AndroidもLinuxカーネルですが、一般的に「Linux環境」とは区別したいため除外する判定
-    if (!/Android/i.test(osFamily)) {
-      return true;
-    }
-  }
-  return false;
+  // Linux、あるいはライブラリが Linux ディストリビューションとして認識しているか
+  // AndroidもLinuxカーネルなので、除外する判定
+  return !!(osFamily && linuxReg.test(osFamily) && !/Android/i.test(osFamily));
+}
+
+function is_iOS(){
+  const my_reg = /iOS/i;
+  const osFamily = platform.os ? platform.os.family : "";
+
+  // 直接 'iOS' という文字列が含まれているか
+  return !!(osFamily && my_reg.test(osFamily));
 }
 
 shouldRedirect();
