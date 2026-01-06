@@ -1393,7 +1393,7 @@ function isLinux(){
 
   // Linux、あるいはライブラリが Linux ディストリビューションとして認識しているか
   // AndroidもLinuxカーネルなので、除外する判定
-  return !!(osFamily && linuxReg.test(osFamily) && !/Android/i.test(osFamily));
+  return !!(osFamily && my_reg.test(osFamily) && !/Android/i.test(osFamily));
 }
 
 function isMacOS(){
